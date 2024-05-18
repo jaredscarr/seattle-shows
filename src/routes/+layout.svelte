@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import '../app.postcss';
 	import { AppShell, AppBar, LightSwitch } from "@skeletonlabs/skeleton";
 	import { Github } from "lucide-svelte";
 
