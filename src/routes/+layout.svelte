@@ -3,6 +3,7 @@
 	import { AppShell, AppBar, LightSwitch } from "@skeletonlabs/skeleton";
 	import { Github } from "lucide-svelte";
 
+	export const prerender = true;
 	const currYear = new Date().getFullYear();
 </script>
 
