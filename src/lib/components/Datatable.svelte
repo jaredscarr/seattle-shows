@@ -8,9 +8,8 @@
 	import { events } from '$lib/data/store';
 	import { DataHandler } from '@vincjo/datatables';
 
-	const data: unknown = $events;
-	const handler = new DataHandler(data as never[], { rowsPerPage: 5 });
-	const rows = handler.getRows();
+	$: handler = new DataHandler($events, { rowsPerPage: 5 });
+	$: rows = handler.getRows();
 
 </script>
 

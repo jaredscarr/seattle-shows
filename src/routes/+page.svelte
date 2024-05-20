@@ -10,15 +10,14 @@
 		if (cachedEvents) {
 			events.set(JSON.parse(cachedEvents));
 		} else {
-			data = await fetch('https://6an5pj1dl8.execute-api.us-west-2.amazonaws.com/default/event-scraper')
+			data = await fetch('https://6an5pj1dl8.execute-api.us-west-2.amazonaws.com/prod/event-scraper')
 				.then((response) => response.json())
 				.then((dataJson) => dataJson)
 				.catch((err) => console.warn(err));
+			events.set(JSON.parse(JSON.stringify(data)));
 			localStorage.setItem('cachedEvents', JSON.stringify(data));
-			events.set(JSON.stringify(data));
 		}
 
-		// Clear the local storage after 12 hours
 		setInterval(() => localStorage.clear(), 43200000);
 	});
 </script>
