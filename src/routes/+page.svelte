@@ -10,7 +10,6 @@
 		if (cachedEvents) {
 			events.set(JSON.parse(cachedEvents));
 		} else {
-			console.log("events not found fetching data");
 			data = await fetch('https://6an5pj1dl8.execute-api.us-west-2.amazonaws.com/default/event-scraper')
 				.then((response) => response.json())
 				.then((dataJson) => dataJson)
