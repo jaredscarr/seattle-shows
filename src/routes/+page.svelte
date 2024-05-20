@@ -24,7 +24,7 @@
 </script>
 <svelte:head>
 	<title>Seattle Shows</title>
-	<meta name="Displays table of a subset of live music in Seattle" content="shows.jaredscarr.com" />
+	<meta name="Displays table of a subset of live music in Seattle" content="seattle-shows.jaredscarr.com" />
 </svelte:head>
 
 <section>
