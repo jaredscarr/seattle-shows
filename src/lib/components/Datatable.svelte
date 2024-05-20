@@ -1,25 +1,17 @@
 <script lang="ts">
-	//Import local datatable components
 	import ThSort from '$lib/components/ThSort.svelte';
 	import ThFilter from '$lib/components/ThFilter.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import RowsPerPage from '$lib/components/RowsPerPage.svelte';
 	import RowCount from '$lib/components/RowCount.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
+	import { events } from '$lib/data/store';
+	import { DataHandler } from '@vincjo/datatables';
 
-	//Load remote data
-	import { reload } from '../data/api';
-
-	//Import handler & Types from SSD remote
-	import { DataHandler } from '@vincjo/datatables/remote';
-	import type { State, Row } from '@vincjo/datatables/remote';
-
-	//Init data handler - SERVER
-	const handler = new DataHandler<Row>([], { rowsPerPage: 5, totalRows: 200 });
+	const data: unknown = $events;
+	const handler = new DataHandler(data as never[], { rowsPerPage: 5 });
 	const rows = handler.getRows();
 
-	handler.onChange((state: State) => reload(state));
-	handler.invalidate();
 </script>
 
 <div class="overflow-y-auto space-y-4">
@@ -30,22 +22,31 @@
 	<table class="table table-hover table-compact w-full table-auto">
 		<thead>
 		<tr>
-			<ThSort {handler} orderBy="id">ID</ThSort>
-			<ThSort {handler} orderBy="title">Title</ThSort>
-			<ThSort {handler} orderBy="completed">Completed</ThSort>
+			<ThSort {handler} orderBy="date">Date</ThSort>
+			<ThSort {handler} orderBy="headliner">Headliner</ThSort>
+			<ThSort {handler} orderBy="support_talent">Openers</ThSort>
+			<ThSort {handler} orderBy="showtime">Showtime</ThSort>
+			<ThSort {handler} orderBy="venue">Venue</ThSort>
+			<ThSort {handler} orderBy="age">Age</ThSort>
 		</tr>
 		<tr>
-			<ThFilter {handler} filterBy="id" />
-			<ThFilter {handler} filterBy="title" />
-			<ThFilter {handler} filterBy="completed" />
+			<ThFilter {handler} filterBy="date" />
+			<ThFilter {handler} filterBy="headliner" />
+			<ThFilter {handler} filterBy="support_talent" />
+			<ThFilter {handler} filterBy="showtime" />
+			<ThFilter {handler} filterBy="venue" />
+			<ThFilter {handler} filterBy="age" />
 		</tr>
 		</thead>
 		<tbody>
 		{#each $rows as row}
 			<tr>
-				<td>{row.id}</td>
-				<td>{row.title}</td>
-				<td>{@html row.completed ? '&check;' : '&#x2715;'}</td>
+				<td>{row.date}</td>
+				<td>{row.headliner}</td>
+				<td>{row.support_talent}</td>
+				<td>{row.showtime}</td>
+				<td>{row.venue}</td>
+				<td>{row.age}</td>
 			</tr>
 		{/each}
 		</tbody>
