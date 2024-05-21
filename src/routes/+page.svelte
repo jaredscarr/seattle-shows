@@ -27,5 +27,7 @@
 </svelte:head>
 
 <section>
-	<Datatable />
+	<div class="m-5">
+		<Datatable />
+	</div>
 </section>
