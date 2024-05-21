@@ -23,7 +23,6 @@
 		<tr>
 			<ThSort {handler} orderBy="date">Date</ThSort>
 			<ThSort {handler} orderBy="headliner">Headliner</ThSort>
-			<ThSort {handler} orderBy="support_talent">Openers</ThSort>
 			<ThSort {handler} orderBy="showtime">Showtime</ThSort>
 			<ThSort {handler} orderBy="venue">Venue</ThSort>
 			<ThSort {handler} orderBy="age">Age</ThSort>
@@ -31,7 +30,6 @@
 		<tr>
 			<ThFilter {handler} filterBy="date" />
 			<ThFilter {handler} filterBy="headliner" />
-			<ThFilter {handler} filterBy="support_talent" />
 			<ThFilter {handler} filterBy="showtime" />
 			<ThFilter {handler} filterBy="venue" />
 			<ThFilter {handler} filterBy="age" />
@@ -41,8 +39,7 @@
 		{#each $rows as row}
 			<tr>
 				<td>{row.date}</td>
-				<td>{row.headliner}</td>
-				<td>{row.support_talent}</td>
+				<td><a href={row.url}>{row.headliner}</a></td>
 				<td>{row.showtime}</td>
 				<td>{row.venue}</td>
 				<td>{row.age}</td>
