@@ -3,19 +3,22 @@
 	import { onMount } from 'svelte';
 	import { events } from '$lib/data/store';
 
-	let data: string;
+	const ENDPOINTS = ['corazon', 'barboza'];
 
 	onMount(async () => {
 		const cachedEvents = localStorage.getItem('cachedEvents');
 		if (cachedEvents) {
 			events.set(JSON.parse(cachedEvents));
 		} else {
-			data = await fetch('https://6an5pj1dl8.execute-api.us-west-2.amazonaws.com/prod/event-scraper')
-				.then((response) => response.json())
-				.then((dataJson) => dataJson)
-				.catch((err) => console.warn(err));
-			events.set(JSON.parse(JSON.stringify(data)));
-			localStorage.setItem('cachedEvents', JSON.stringify(data));
+			const requests = ENDPOINTS.map(async param => {
+				return await fetch(`https://6an5pj1dl8.execute-api.us-west-2.amazonaws.com/prod/event-scraper?integration=${param}`)
+					.then((response) => response.json())
+					.then((dataJson) => dataJson)
+					.catch((err) => console.warn(err));
+			});
+			const fetchResults = (await Promise.all(requests)).flat();
+			events.set(JSON.parse(JSON.stringify(fetchResults)));
+			localStorage.setItem('cachedEvents', JSON.stringify(fetchResults));
 		}
 
 		setInterval(() => localStorage.clear(), 43200000);
