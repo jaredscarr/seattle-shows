@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { events } from '$lib/data/store';
 
-	const ENDPOINTS = ['corazon', 'barboza'];
+	const ENDPOINTS = ['showbox', 'corazon', 'barboza'];
 
 	onMount(async () => {
 		const cachedEvents = localStorage.getItem('cachedEvents');
